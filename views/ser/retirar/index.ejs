@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iRango | Retirar</title>
+    <script src="/lib/tailwind.js"></script>
+    <script defer src="/lib/flowbite.js"></script>
+    <script defer src="/js/back.js"></script>
+    <script src="/lib/socketio.js"></script>
+    <script defer src="/js/socketRetirar.js"></script>
+</head>
+
+<body class="bg-gradient-to-tr from-gray-900 via-gray-950 to-black flex items-center justify-center min-h-screen">
+    <%- include('../partials/header.ejs') %>
+    <canvas id="stars" class="absolute top-0 -z-10"></canvas>
+
+    <div class="w-screen h-screen flex justify-evenly items-center">
+        <div
+            class="bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg h-[80vh] w-[50vw] relative border border-white">
+            <h1 class="text-3xl font-semibold text-center text-white mb-6">Retirar</h1>
+
+            <div class="w-full flex flex-col gap-4 h-[70vh] overflow-y-auto items-center" id="pedidos">
+                
+            </div>
+            
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>

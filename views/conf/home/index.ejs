@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="overflow-x-hidden max-h-screen">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./lib/tailwind.js"></script>
+    <title>iRango | Introdução</title>
+</head>
+
+<body class="font-sans bg-white h-screen overflow-hidden">
+
+    <!-- Header -->
+    <header class="w-screen h-[15vh] flex items-center justify-end text-white relative">
+        <img src="/img/image.png"
+            class="h-[9vh] w-auto absolute left-8 transition duration-300 filter brightness-200 saturate-0 hover:saturate-100 hover:brightness-100 hover:hue-rotate-345">
+        <p class="text-black mr-5 font-semibold text-xl">IPv4: <%= ipv4 %>
+        </p>
+    </header>
+
+    <main class="flex flex-col items-center h-[75vh] bg-white py-10 px-4 overflow-y-auto">
+
+        <section class="w-full max-w-4xl mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">IPv4 pendentes</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-b border-gray-300 w-1/2 text-center">IPv4</th>
+                        <th class="px-4 py-2 border-b border-gray-300">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pending.forEach(ip=> { %>
+                        <tr>
+                            <td class="px-4 py-2 border-b border-gray-300 text-center">
+                                <%= ip %>
+                            </td>
+                            <td class="px-4 py-2 border-b border-gray-300 flex justify-center space-x-2">
+                                <a href="/ip/add/<%= ip %>" class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+                                  </svg></a>
+                                <a href="/ip/remove/<%= ip %>" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                                    <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                                  </svg></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </section>
+        <section class="w-full max-w-4xl mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">IPv4 Whitelist</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-b border-gray-300 w-1/2 text-center">IPv4</th>
+                        <th class="px-4 py-2 border-b border-gray-300">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% whitelist.forEach(ip=> { %>
+                        <tr>
+                            <td class="px-4 py-2 border-b border-gray-300 text-center">
+                                <%= ip %>
+                            </td>
+                            <td class="px-4 py-2 border-b border-gray-300 flex justify-center space-x-2">
+                                <a href="/ip/revoke/<%= ip %>" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                                    <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                                  </svg></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </section>
+        <section class="w-full max-w-4xl mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">IPv4 Blacklist</h2>
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-b border-gray-300 w-1/2 text-center">IPv4</th>
+                        <th class="px-4 py-2 border-b border-gray-300">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% blacklist.forEach(ip=> { %>
+                        <tr>
+                            <td class="px-4 py-2 border-b border-gray-300 text-center">
+                                <%= ip %>
+                            </td>
+                            <td class="px-4 py-2 border-b border-gray-300 flex justify-center space-x-2">
+                                <a href="/ip/revoke/<%= ip %>" class="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                                    <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+                                  </svg></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+
+</html>

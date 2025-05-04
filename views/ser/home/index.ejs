@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iRango | Pedidos</title>
+    <script src="/lib/vanilla.js"></script>
+    <script src="/lib/tailwind.js"></script>
+    <script defer src="/lib/flowbite.js"></script>
+    <script defer src="/lib/3deffect.js"></script>
+    <script defer src="/js/back.js"></script>
+    <script defer src="/js/3deffect.js"></script>
+    <script defer src="/js/pedido.js"></script>
+</head>
+<body class="bg-gradient-to-tr from-gray-900 via-gray-950 to-black flex items-center justify-center min-h-screen">
+  <%- include('../partials/header.ejs') %>
+
+    <canvas id="stars" class="absolute top-0 -z-10"></canvas>
+
+    <form action="/" method="post" class="w-screen h-screen flex justify-evenly">
+
+      <div id="alerta" class="transition-all duration-300 opacity-0 hidden absolute top-3 left-3 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Successo!</span> Pedido anotado.
+        </div>
+      </div>
+
+
+        <div class="w-1/2 flex items-center justify-center flex-col">
+            <div
+                class="card bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] border border-white">
+                
+                <h1 class="text-3xl font-bold text-center bg-gradient-to-tr from-white to-slate-600 bg-clip-text text-transparent mb-6">Informações do cliente</h1>
+                <div class="space-y-4">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="email" name="floating_email" id="nomeCliente"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome
+                            do cliente</label>
+                    </div><div class="relative z-0 w-full mb-5 group">
+                        <input type="email" name="floating_email" id="observacao"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Observações</label>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg w-full max-w-[35vw] m-10 min-h-[40vh] max-h-[70vh] relative border border-white overflow-x-auto">
+                <h1 class="text-3xl font-bold text-center bg-gradient-to-tr from-white to-slate-600 bg-clip-text text-transparent mb-6">Resumo do pedido</h1>
+
+            <div id="produtos">
+                
+            </div>
+
+
+                <div class="absolute right-5 bottom-5 flex gap-2 items-center">
+                    <button type="button" onclick="finalizar()" class="w-[8vw] text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br 
+                               focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg 
+                               shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg 
+                               text-sm px-5 py-2.5 text-center">
+                        Finalizar
+                    </button>
+
+                    <div
+                        class="p-2 text-xl text-white font-bold rounded-lg text-center flex justify-center items-center gap-2">
+                        <span class="text-xl">Total:</span> <p id="total">R$ 0.00</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="w-1/2 flex items-center justify-center">
+            <div class="bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] flex gap-5 flex-col items-center max-h-[80vh] border border-white">
+              <h1 class="text-3xl font-bold text-center bg-gradient-to-tr from-white to-slate-600 bg-clip-text text-transparent mb-6">Produtos</h1>
+          
+              <div class="relative w-full">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
+                <input type="search" id="default-search"
+                  class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Empada, Calzone, Pão de Batata . . ." required />
+              </div>
+          
+              <div id="produtos-container" class="w-full flex flex-col gap-5 overflow-y-auto">
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            const produtos = [
+              <% produtos.forEach(produto => { %>
+                <% if(produto.mostrar){ %>
+                {
+                  id: <%= produto.id %>,
+                  nome: "<%- produto.nome || '' %>",
+                  preco: <%= produto.preco || 0 %>,
+                  ingredientes: "<%- produto.ingredientes || '' %>",
+                  imagem: "<%- produto.imagem %>",
+                  inPromo: <%= produto.inPromo %>,
+                  promo: <%= produto.promo %>
+                },
+                <% } %>
+              <% }) %>
+            ];
+          </script>
+          
+    </form>
+</body>
+
+</html>
+
+
+
+

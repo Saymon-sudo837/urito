@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="overflow-x-hidden max-h-screen">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="/lib/flowbite.js"></script>
+    <script src="/lib/tailwind.js"></script>
+    <script defer src="/js/back.js"></script>
+    <script defer src="/js/brlformat.js"></script>
+    <title>iRango | Administração</title>
+</head>
+
+<body class="font-sans bg-gradient-to-tr from-gray-900 via-gray-950 to-black h-screen overflow-hidden">
+    <%- include('../partials/header.ejs') %>
+        <canvas id="stars" class="absolute top-0 -z-10"></canvas>
+        <main class="w-screen h-screen overflow-hidden flex items-center justify-center relative">
+            <% if(typeof mensagem != 'undefined'){ %>
+                    <div id="mensagem" class="transition-all duration-300 absolute top-3 left-3 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                        <span class="font-medium">Successo!</span> <%= mensagem %>
+                        </div>
+                    </div>
+                    <script>
+                        (() => {
+                            setTimeout(() => {
+                                document.getElementById('mensagem').classList.add('opacity-0');
+                            }, 5000);
+                        })();                        
+                    </script>
+                    <% } %>
+                    <% if(typeof erro != 'undefined'){ %>
+                        <div id="erro" class="transition-all duration-300 absolute top-3 left-3 flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                              <span class="font-medium">Erro!</span> <%= erro %>
+                            </div>
+                          </div>
+                          <script>
+                            (() => {
+                                setTimeout(() => {
+                                    document.getElementById('erro').classList.add('opacity-0');
+                                }, 5000);
+                            })();                        
+                        </script>
+                    <% } %>
+            <form action="" method="post" enctype="multipart/form-data"
+                class="bg-gradient-to-tl from-gray-600 to-gray-700 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] border border-white">
+                <h1 class="text-3xl font-semibold text-center text-white mb-6">Novo Produto</h1>
+                <div class="space-y-4">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" name="nome" id="floating_email"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nome
+                            do produto</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" name="ingredientes" id="floating_email"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Ingredientes
+                            do produto</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" name="preco" id="floating_email"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " required onKeyPress="return(moeda(this,'.',',',event))" />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Preço</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <label for="file-input" class="text-white text-sm">Imagem demonstrativa</label>
+                        <input type="file" name="imagem" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+    file:bg-gray-50 file:border-0
+    file:me-4
+    file:py-3 file:px-4 text-white file:text-black" required >
+                    </div>
+                    <button type="submit" class="text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Registrar</button>
+                </div>
+            </form>
+        </main>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="overflow-x-hidden max-h-screen">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="/lib/flowbite.js"></script>
+    <script src="/lib/tailwind.js"></script>
+    <script defer src="/js/back.js"></script>
+    <script defer src="/js/promotion.js"></script>
+    <title>iRango | Editar promoção</title>
+</head>
+
+<body class="font-sans bg-gradient-to-tr from-gray-900 via-gray-950 to-black h-screen overflow-hidden">
+    <%- include('../partials/header.ejs') %>
+        <canvas id="stars" class="absolute top-0 -z-10"></canvas>
+        <main class="w-screen h-screen overflow-hidden flex items-center justify-center relative">
+
+            <form method="post" enctype="multipart/form-data"
+                class="bg-gradient-to-tl from-gray-600 to-gray-700 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] border border-white">
+                <h1 class="text-3xl font-semibold text-center text-white mb-6">Editar Promoção</h1>
+                <div class="space-y-4">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" name="ingredientes" id="precoPrevisto"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
+                            placeholder=" " readonly required value="R$ <%= produto.preco %>" />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Preço previsto</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="number" name="promo" id="promo"
+                            class="text-lg text-white block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            placeholder=" " onkeyup="porcent(this)" required value="<%= produto.promo %>" />
+                        <label for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Porcentagem de desconto ( 0 para nenhnum desconto. )</label>
+                    </div>
+                    <button type="submit" class="text-white w-full bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Registrar</button>
+                </div>
+            </form>
+        </main>
+</body>
+<script>
+    const preco = <%= produto.preco %>;
+</script>
+</html>

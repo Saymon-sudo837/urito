@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="overflow-x-hidden max-h-screen">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/lib/vanilla.js"></script>
+    <script src="/lib/tailwind.js"></script>
+    <script defer src="/lib/flowbite.js"></script>
+    <script src="/lib/charts.js"></script>
+    <script defer src="/lib/3deffect.js"></script>
+    <script defer src="/js/back.js"></script>
+    <script defer src="/js/3deffect.js"></script>
+    <title>iRango | Vendas</title>
+</head>
+
+<body class="font-sans bg-gradient-to-tr from-gray-900 via-gray-950 to-black h-screen overflow-hidden">
+    <%- include('../partials/header.ejs') %>
+        <canvas id="stars" class="absolute top-0 -z-10"></canvas>
+        <main class="w-screen h-screen flex items-center justify-center">
+            <div
+                class="bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] flex gap-5 flex-col items-center max-h-[80vh] border border-white">
+                <h1 class="text-3xl font-semibold text-center text-white mb-6">Vendas | 7 Últimos dias</h1>
+                    <canvas id="vendasSemanais"></canvas>
+                <div class="w-full flex flex-col gap-5 overflow-y-auto">
+                </div>
+            </div>
+            
+            <div
+                class="bg-gradient-to-tl from-gray-600 to-gray-800 p-6 rounded-lg shadow-lg w-full m-10 max-w-[35vw] flex gap-5 flex-col items-center max-h-[80vh] border border-white">
+                <h1 class="text-3xl font-semibold text-center text-white mb-6">Vendas | 30 Últimos dias</h1>
+                    <canvas id="vendasMensal"></canvas>
+                <div class="w-full flex flex-col gap-5 overflow-y-auto">
+                </div>
+            </div>
+        </main>
+</body>
+<script>
+    const ctx = document.getElementById('vendasSemanais').getContext('2d');
+    const meuGrafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['6 dias atrás','5 dias atrás', '4 dias atrás', '3 dias atrás', '2 dias atrás', 'Ontem', 'Hoje'],
+            datasets: [{
+                label: 'Vendas',
+                data: [<%- semanal %>],
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+    responsive: true,
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                color: '#ffffff' 
+            }
+        },
+        x: {
+            ticks: {
+                color: '#ffffff' 
+            }
+        }
+    }
+}
+    });
+</script>
+
+<script>
+    const ctxMensal = document.getElementById('vendasMensal').getContext('2d');
+    const meuGraficoMensal = new Chart(ctxMensal, {
+        type: 'line',
+        data: {
+            labels: [
+                '30 dias atrás', '29 dias atrás', '28 dias atrás', '27 dias atrás', '26 dias atrás', 
+                '25 dias atrás', '24 dias atrás', '23 dias atrás', '22 dias atrás', '21 dias atrás', 
+                '20 dias atrás', '19 dias atrás', '18 dias atrás', '17 dias atrás', '16 dias atrás',
+                '15 dias atrás', '14 dias atrás', '13 dias atrás', '12 dias atrás', '11 dias atrás',
+                '10 dias atrás', '9 dias atrás', '8 dias atrás', '7 dias atrás', '6 dias atrás',
+                '5 dias atrás', '4 dias atrás', '3 dias atrás', '2 dias atrás', 'Ontem', 'Hoje'
+            ],
+            datasets: [{
+                label: 'Vendas',
+                data: [<%- mensal %>],  
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#ffffff' 
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff' 
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</html>
